@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import datetime
 import json
 
+app = Flask(__name__)
+
 def add_message(text, sender):
     now = datetime.datetime.now() # RAW Current Time
     current_time = now.strftime('%Y.%m.%d %H:%M:%S')
@@ -44,12 +46,13 @@ def send_message():
     # получить из браузера имя и текст
     name = request.args['name']
     text = request.args['text']
-    if 3 > len(name) > 100 or 1 > len(text) > 3000:
-        return 'Error'
+    if len(name) < 3 or len(name) > 100
+        text = 'ERROR: Имя должно быть не короче 3 и не длиннее 100 символов'
+    if len(text) < 1 or len(text) > 3000:
+        text = 'ERROR: Текст должен быть не короче 1 и не длинее 3000 символов'
     add_message(text, name)
     return 'Ok'
 
-app = Flask(__name__)
 
 DB_FILE = './data/db.json'
 db = open(DB_FILE, 'rb')
