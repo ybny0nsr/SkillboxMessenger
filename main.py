@@ -46,7 +46,7 @@ def send_message():
     # получить из браузера имя и текст
     name = request.args['name']
     text = request.args['text']
-    if len(name) < 3 or len(name) > 100
+    if len(name) < 3 or len(name) > 100:
         text = 'ERROR: Имя должно быть не короче 3 и не длиннее 100 символов'
     if len(text) < 1 or len(text) > 3000:
         text = 'ERROR: Текст должен быть не короче 1 и не длинее 3000 символов'
