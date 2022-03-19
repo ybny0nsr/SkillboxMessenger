@@ -16,12 +16,14 @@ def add_message(text, sender):
     save_messages_to_file()
 
 def save_messages_to_file():
-    db = open(DB_FILE, 'w')
     data = {
         'messages' : messages
     }
-    json.dump(data, db)
-    db.close()
+    # db = open(DB_FILE, 'w')
+    # json.dump(data, db)
+    # db.close()
+    with open(DB_FILE, 'w') as db:
+        json.dump(data, db)
 
 def print_message(message):
     print(f'{message["sender"]}: {message["text"]} / {message["time"]}')
@@ -55,9 +57,11 @@ def send_message():
 
 
 DB_FILE = './data/db.json'
-db = open(DB_FILE, 'rb')
-data = json.load(db)
-db.close()
+# db = open(DB_FILE, 'rb')
+# data = json.load(db)
+# db.close()
+with open(DB_FILE, 'rb') as db:
+    data = json.load(db)
 messages = data['messages']
 
 app.run()
